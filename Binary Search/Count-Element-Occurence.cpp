@@ -61,7 +61,11 @@ int FindCount(vector<int> &A,int x)
     int First,Last;
     First = FindFirst(A,x);
     Last = FindLast(A,x);
-    return(Last-First+1);
+    
+    if(Last >= 0 && First >= 0)
+        return(Last-First+1);
+    else
+        return 0;
 }
 
 int main()
