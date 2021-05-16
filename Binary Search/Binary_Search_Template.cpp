@@ -2,27 +2,29 @@
 /* here Arr is an of integer type, n is size of array 
    and target is element to be found */
 
-int binarySearch(int *Arr, int n, int target) {
-
+int binarySearch(vector<int> Arr,int target) 
+{
 	//set stating and ending index
-	int start = 0, ending = n-1;
+	int low = 0, high = A.size()-1;
 
-	while(start <= ending) {
+	while(low <= high) 
+	{
 		// take mid of the list
 		int mid = (start + end) / 2;
+		cout <<"low = "<<low<<" , high = "<< high<<" , mid = "<< mid << endl;
 
 		// we found a match
-		if(Arr[mid] == target) {
+		if(A[mid] == target) 
 			return mid; 
-		}
+		
 		// go on right side
-		else if(Arr[mid] < target) {
+		else if(A[mid] < target) 
 			start = mid + 1;
-		}
+		
 		// go on left side
-		else {
+		else 
 			end = mid - 1;
-		}
+	
 	}
 	// element is not present in list
 	return -1;
