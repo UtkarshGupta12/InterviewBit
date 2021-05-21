@@ -64,3 +64,63 @@ int main()
     cout << B;
     return 0;
 }
+
+
+// METHOD - 2 , Correct with better Time Complexity
+
+#include <iostream>
+#include <string>
+#include <bits/stdc++.h>
+using namespace std;
+
+void bin(int n)
+{
+    long i;
+    cout << "0";
+    for (i = 1 << 30; i > 0; i = i / 2)
+    {
+      if((n & i) != 0)
+      {
+        cout << "1";
+      }
+      else
+      {
+        cout << "0";
+      }
+    }
+    cout << endl;
+}
+
+int cntBits(vector<int> &A) 
+{
+    long long int sum = 0;
+    for(int i=0;i<32;i++)
+    {
+        int count=0;
+        for(int j=0;j<A.size();j++)
+        {
+            if(A[j]&1)
+                count++;
+            A[j]=A[j]>>1;    
+        }
+        sum +=count*(A.size()-count)*2;
+    }
+    
+    sum = sum%1000000007;
+    return sum;
+}
+
+int main() 
+{
+    vector<int> A;
+    A.push_back(1);
+    A.push_back(3);
+    A.push_back(5);
+    
+    cout <<"1 : 001"<<endl;
+    cout <<"3 : 011"<<endl;
+    cout <<"5 : 101"<<endl;
+    int B = cntBits(A);
+    cout << B;
+    return 0;
+}
