@@ -3,6 +3,18 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+void printMatrix(vector<vector<int>> &mat)  
+{
+    int nrows = mat.size();
+    int ncols = mat[0].size();
+    for(int i=0;i<nrows;i++)
+    {
+        for(int j=0;j<ncols;j++)
+            cout << mat[i][j] << " ";
+        cout << endl;        
+    }        
+}
+
 void printVec(vector<int> &v)
 {
     int N = v.size();
