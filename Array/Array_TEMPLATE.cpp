@@ -3,6 +3,13 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+void printPair(vector<pair<int,int>> &pair1)
+{
+    for(int i = 0; i < pair1.size(); i++)
+         cout <<"["<< pair1[i].first << "," << pair1[i].second<<"],";
+
+    cout << endl;  }
+
 void printMatrix(vector<vector<int>> &mat)  
 {
     int nrows = mat.size();
