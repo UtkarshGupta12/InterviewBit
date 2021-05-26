@@ -4,13 +4,6 @@
 #define M 10000003
 using namespace std;
 
-void reverseParanthesis(char c)
-{
-    if(c==')')
-        c = '(';
-    else
-        c = ')';}
-
 int solve(string A)
 {
     string sample = "()";
