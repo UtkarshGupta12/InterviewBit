@@ -13,28 +13,24 @@ void printVec(vector<int> &v)
     }
     cout <<endl;}
 
-/*int SumofPainters(vector<int> &A, int num)
+long long SumofPainters(vector<int> &A, long long num)
 {
-    int sum = 0;
-    int count = 0;
-    int max_sum = INT_MIN;
+    long long sum = 0;
+    long long max_sum = INT_MIN;
 
     for(int i=0;i<A.size();i++)
     {
         sum+=A[i];
         max_sum = max(sum,max_sum);
-
-        if(sum>=x)
-        {
-            count++;
+        if(sum>num)
             sum = 0;
-        }
     }
-    return max_sum;}*/
 
-int NumberofPainters(vector<int> &A, int x)
+    return max_sum;}
+
+long long NumberofPainters(vector<int> &A, long long x)
 {
-    int sum = 0;
+    long long sum = 0;
     int  count = 1;
     for(int i=0;i<A.size();i++)
     {
@@ -42,37 +38,40 @@ int NumberofPainters(vector<int> &A, int x)
         if(sum>=x)
         {
             count++;
-            sum = 0;
+            sum = A[i];
         }
     }
     return count;}
 
 int paint(int B, int T, vector<int> &A) 
 {
-    int low = *max_element(A.begin(),A.end());
-    int high = accumulate(A.begin(),A.end(),0);
-    int mid = -1;
-    int error = 10;
-    int num_painters;
+    long long low = *max_element(A.begin(),A.end());
+    int max_vector = *max_element(A.begin(),A.end());
+    long long high = accumulate(A.begin(),A.end(),0);
+    long long mid = -1;
+    int error = 25;
+    long long num_painters;
 
-    while(low<=high || error>0)
+    if(A.size()<=B)
+        return (max_vector*T)%M;
+
+    while(low<high && error>0)
     {
         mid = low +(high-low)/2;
         num_painters = NumberofPainters(A,mid);
-        cout<<"Numeber of Painters : "<<num_painters<<" & mid : "<<mid<<endl;
-
-        //if(num_painters == B)
-        //    return mid;        
+        cout<<"Number of Painters : "<<num_painters<<" & mid : "<<mid<<endl;
+     
         if(num_painters<=B)
-            high = mid-1;
+            high = mid;
         else        
             low = mid+1;
 
-        error--;
-    }
+        error--;}
 
-    return INT_MAX;
-}
+    if(num_painters<B)
+        return T*max_vector%M;
+    else        
+        return T*SumofPainters(A,mid)%M;}
 
 int main() {
   #ifndef ONLINE_JUDGE
@@ -82,29 +81,29 @@ int main() {
     freopen("output.txt","w",stdout);
   #endif
 
-    // Boards = [10, 20, 15, 30, 24, 35, 28, 15, 10]
-    //            0   1   2   3   4   5   6   7   8
-    // Painters = 4;
-    // Unit Time = 5;
-    vector<int> A;
-    A.push_back(10);
-    A.push_back(20);
-    A.push_back(15);
-    A.push_back(30);
-    A.push_back(24);
-    A.push_back(35);
-    A.push_back(28);
-    A.push_back(15);
-    A.push_back(10);
+    // Boards = [ 449, 792, 564, 261, 584, 798, 514, 616 ]
+    //              0    1    2    3    4    5    6    7
+    // Painters = 2;
+    // Unit Time = 10;
+	vector<int> A;
+    A.push_back(449);
+    A.push_back(792);
+    A.push_back(564);
+    A.push_back(261);
+    A.push_back(584);
+    A.push_back(798);
+    A.push_back(514);
+    A.push_back(616);
+    //A.push_back(10);
 
     cout << "Boards : ";
     printVec(A);
 
-    int B = 4;
+    int B = 2;
     cout <<"Number of Painters are : "<<B<<endl;
 
-    int T = 5;
-    cout <<"Unit Time : "<<T<<endl;    
+    int T = 10;
+    cout <<"Unit Time : "<< T << endl << endl;    
 
     int ans = paint(B,T,A);
     cout << endl << ans << endl;
