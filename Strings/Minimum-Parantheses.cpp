@@ -38,7 +38,7 @@ int main() {
     cout << endl << ans << endl;
 }
 
-// METHOD - 2 BY Pushkar Agarwal
+// METHOD - 2 BY Pushkar Kumar
 
 int Solution::solve(string str) 
 {
