@@ -37,3 +37,27 @@ int main() {
     int ans = solve(ques);
     cout << endl << ans << endl;
 }
+
+// METHOD - 2 BY Pushkar Agarwal
+
+int Solution::solve(string str) 
+{
+    int i;
+    int a=0;
+    int b=0;
+    
+    for(i=0; i<str.length();i++)
+    {
+       //char c=str[i];
+        if(str[i]=='(')
+            a=a+1;
+        else
+            a=a-1;
+        if(a==-1)
+        {
+            a=a+1;
+            b=b+1;
+        }
+    }
+    return(a+b);
+} 
