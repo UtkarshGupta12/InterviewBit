@@ -166,6 +166,77 @@ bool search(Node* head, int x)
     }
     return false;}
 
+int GetNth(Node* head, int index)
+{
+ 
+    Node* current = head;
+ 
+    // the index of the
+    // node we're currently
+    // looking at
+    int count = 0;
+    while (current != NULL) {
+        if (count == index)
+            return (current->data);
+        count++;
+        current = current->next;
+    }
+ 
+    /* if we get to this line,
+    the caller was asking
+    for a non-existent element
+    so we assert fail */
+    assert(0);}
+
+/* Function to get the nth node from the last of a linked list*/
+void printNthFromLast(struct Node* head, int n)
+{
+    int len = 0, i;
+    struct Node* temp = head;
+ 
+    // count the number of nodes in Linked List
+    while (temp != NULL) {
+        temp = temp->next;
+        len++;
+    }
+ 
+    // check if value of n is not
+    // more than length of the linked list
+    if (len < n)
+        return;
+ 
+    temp = head;
+ 
+    // get the (len-n+1)th node from the beginning
+    for (i = 1; i < len - n + 1; i++)
+        temp = temp->next;
+ 
+    cout << temp->data;
+ 
+    return;}        
+
+void printMiddle(struct node* head)
+{
+    int count = 0;
+    struct node* mid = head;
+ 
+    while (head != NULL)
+    {
+         
+        // Update mid, when 'count'
+        // is odd number
+        if (count & 1)
+            mid = mid->next;
+ 
+        ++count;
+        head = head->next;
+    }
+ 
+    // If empty list is provided
+    if (mid != NULL)
+        printf("The middle element is [%d]\n\n",
+                mid->data);}
+
 int main() {
 #ifndef ONLINE_JUDGE
     // for getting input from input.txt     
