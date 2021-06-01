@@ -43,46 +43,87 @@ int getCount(Node* head)
     }
     return count;}
 
-void ReversePart(Node* SS,Node* E)
+Node* reverse(Node* head)
 {
-    Node* S = SS->next;
-    Node* EE = E->next;
-
-    Node* prev = SS;
-    Node* curr = S;
-    Node* forw = S->next;
-    int error = 10;
-
-    while(forw->next && forw && error)
-    {
-        curr -> next = prev;
+    struct Node* prev = NULL;   
+    struct Node* curr = head;
+ 
+    while (curr) {
+        struct Node* next = curr->next;
+        curr->next = prev;
         prev = curr;
-        curr = forw;
-        forw = forw -> next;
-        error--;
-        if(forw->next == EE || forw->next == NULL)
-            break;
-    }}
+        curr = next;
+    }
+
+    return prev;}
+
+Node* reverseBetween(Node* head, int m, int n)
+{
+    if (m == n)
+        return head;
+ 
+    // revs and revend is start and end respectively
+    // of the portion of the linked list which
+    // need to be reversed. revs_prev is previous
+    // of starting position and revend_next is next
+    // of end of list to be reversed.
+    Node* revs = NULL, *revs_prev = NULL;
+    Node* revend = NULL, *revend_next = NULL;
+ 
+    // Find values of above pointers.
+    int i = 1;
+    Node* curr = head;
+    while (curr && i <= n) {
+        if (i < m)
+            revs_prev = curr;
+ 
+        if (i == m)
+            revs = curr;
+ 
+        if (i == n) {
+            revend = curr;
+            revend_next = curr->next;
+        }
+ 
+        curr = curr->next;
+        i++;
+    }
+    revend->next = NULL;
+ 
+    // Reverse linked list starting with
+    // revs.
+    revend = reverse(revs);
+ 
+    // If starting position was not head
+    if (revs_prev)
+        revs_prev->next = revend;
+ 
+    // If starting position was head
+    else
+        head = revend;
+ 
+    revs->next = revend_next;
+    return head;}
 
 Node* reverseList(Node* head,int K)
 {
-    Node* temphead = new Node();
-    temphead->data = 0;
-    temphead->next = head;
-
+    if(K==1)
+        return head;
     int len = getCount(head);
     int times = len/K;
     cout<<"Length : "<<len<<endl<<"Times of Rotation : "<<times<<endl;
+    int m = 1;
+    int n = K;
 
     //BASE CASE
-    Node* SS = temphead;
-    Node* E = head->next->next;
-    cout<<"SS : "<<SS->data<<" & E : "<<E->data<<endl;
-    
-    ReversePart(temphead,E);
+    for(int i=1;i<=times;i++)
+    {
+        head = reverseBetween(head,m,n);
+        m += K;
+        n += K;
+    }
 
-    return temphead->next;
-}
+    return head;}    
 
 int main() {
 #ifndef ONLINE_JUDGE
@@ -96,7 +137,7 @@ int main() {
     
     // 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> 9 -> NULL 
     // 3 -> 2 -> 1 -> 6 -> 5 -> 4 -> 9 -> 8 -> 7 -> NULL
-    push(&head, 9);
+    //push(&head, 9);
     push(&head, 8);
     push(&head, 7);
     push(&head, 6);
@@ -108,7 +149,7 @@ int main() {
     
     cout<<"Ques List : ";printList(head);cout<<endl;
 
-    Node* ans = reverseList(head,3);
+    Node* ans = reverseList(head,2);
     cout<<endl<<"Ans List : ";printList(ans);    
 
     return 0;
