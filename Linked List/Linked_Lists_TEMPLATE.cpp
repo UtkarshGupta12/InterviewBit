@@ -31,6 +31,31 @@ void push(Node** head_ref, int new_data)
     /* 4. move the head to point to the new node */
     (*head_ref) = new_node;}  
 
+Node* Merge(Node* A,Node* B,int len)
+{
+    Node* AC = A;
+    Node* AF = A->next;
+    Node* BC = B;
+    Node* BF = B->next;
+
+    while(AF->next && BF)
+    {
+        AC -> next = BC;
+        BC -> next = AF;
+        AC = AF;
+        AF = AF -> next;
+        BC = BF;
+        BF = BF -> next;
+    }
+
+    AC -> next = BC;
+    BC -> next = AF;
+
+    if(len%2==0)
+        AF -> next = BF;
+
+    return A;}
+
 Node* reverse(Node* head)
 {
     struct Node* prev = NULL;   
