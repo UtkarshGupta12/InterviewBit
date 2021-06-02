@@ -31,6 +31,44 @@ void push(Node** head_ref, int new_data)
     /* 4. move the head to point to the new node */
     (*head_ref) = new_node;}  
 
+Node* Insert(Node* head,int from,int to)
+{
+    if(from == to)
+        return head;
+
+    Node* A = NULL;
+    Node* AP = NULL;
+    Node* B = NULL;
+    Node* BP = NULL;
+    Node* temp = head;
+    int count = 0;
+
+    while(temp)
+    {
+        count++;
+        if(count==from)
+            A = temp;
+        else if(count==from-1)
+            AP = temp;
+        else if(count==to)
+            B = temp;
+        else if(count==to-1)
+            BP = temp;
+        temp = temp -> next;}
+
+    if(from-to==1)
+        B = AP;    
+
+    AP -> next = A -> next;
+    A -> next = B;    
+
+    if(to>1)
+        BP -> next = A;
+    else if(to == 1)
+        head = A;
+
+    return head;}
+
 Node* Merge(Node* A,Node* B,int len)
 {
     Node* AC = A;
