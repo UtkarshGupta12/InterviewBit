@@ -20,6 +20,34 @@ void printVec(vector<int> &v)
     }
     cout <<endl;}
 
+void printVecvec(vector<vector<int>> &vec)  
+{
+    for(int i=0;i<vec.size();i++)
+    {
+        for(int j=0;j<vec[i].size();j++)
+            cout << vec[i][j] << " ";
+        cout << endl;        
+    }}
+
+void showpq(priority_queue<int> gq)
+{
+    priority_queue<int> g = gq;
+    while (!g.empty()) {
+        cout << '\t' << g.top();
+        g.pop();
+    }
+    cout << '\n';}
+
+void minshowpq(priority_queue<int, vector<int>, greater<int> > gq)
+{
+    priority_queue<int, vector<int>, 
+                                greater<int> > g = gq;
+    while (!g.empty()) {
+        cout << '\t' << g.top();
+        g.pop();
+    }
+    cout << '\n';}
+
 //printHeap
     size_t IntegerLogarithm2(size_t arg) 
     {
